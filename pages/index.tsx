@@ -20,6 +20,7 @@ export default function Home() {
         justifyContent="center"
         alignItems="center"
         backgroundColor="purple"
+        paddingX="1em"
         paddingY="2em"
         overflow="hidden"
       >
@@ -27,6 +28,7 @@ export default function Home() {
       </Flex>
       <Flex
         flex={["0", "0", "0", "1"]}
+        paddingX="1em"
         paddingY="2em"
         justifyContent="center"
         alignItems="center"
