@@ -11,7 +11,7 @@ export default function LoginForm(props: FlexProps) {
       <Text color="texts_titles" fontSize="2em" fontWeight="bold">
         Fazer login
       </Text>
-      <Box height="1em" />
+      <Box height="2em" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <Flex alignContent="stretch" flexDirection="column">
           <ProffyInput
@@ -20,6 +20,7 @@ export default function LoginForm(props: FlexProps) {
             placeholder="E-mail"
             hookRef={register}
             roundBottomBorder={false}
+            paddingY="2em"
           />
           <ProffyInput
             name="password"
@@ -27,24 +28,26 @@ export default function LoginForm(props: FlexProps) {
             placeholder="Senha"
             hookRef={register}
             roundTopBorder={false}
+            paddingY="2em"
           />
-          <Box height="0.5em" />
+          <Box height="2em" />
           <Flex alignItems="center">
             <Checkbox
               variantColor="custom_green"
               name="rememberMe"
               ref={register}
             >
-              <Text color="texts_complements">Lembrar de mim</Text>
+              <Text color="texts_complements" marginLeft="0.25em">
+                Lembrar de mim
+              </Text>
             </Checkbox>
           </Flex>
-          <Box height="0.75em" />
+          <Box height="2em" />
           <Button
             backgroundColor="green"
             color="shapes_01"
-            paddingX="2em"
-            paddingY="1.5em"
-            fontFamily="titles"
+            paddingX="button_padding_x"
+            paddingY="button_padding_y"
             fontWeight="regular"
             type="submit"
           >

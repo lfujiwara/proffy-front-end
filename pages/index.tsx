@@ -41,7 +41,12 @@ export default function Home() {
           <a href="#">
             <PseudoBox
               as={Text}
-              _hover={{ textDecoration: "underline" }}
+              marginBottom="0"
+              borderBottom="2px solid transparent"
+              _hover={{
+                borderBottom: "2px solid",
+                transition: "border-bottom linear 200ms",
+              }}
               color="purple"
               fontWeight="bold"
             >
