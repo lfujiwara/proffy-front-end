@@ -1,8 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/core";
 import type { AppProps } from "next/app";
 import Router from "next/router";
-import theme from "../styles/theme";
-import "../styles/globals.css";
 import { useEffect, useState } from "react";
 import AuthContext, {
   AuthContextDefaultValue,
@@ -13,6 +11,8 @@ import AuthContext, {
   isAuthenticated,
   logout,
 } from "../contexts/AuthContext";
+import "../styles/globals.css";
+import theme from "../styles/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [authData, setAuthData] = useState<IAuthContextValue>(
@@ -31,8 +31,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       if (isAuthenticated(nextAuthData)) {
         setAuthData(nextAuthData);
-        await Router.push("/home");
-        return;
       }
     } catch (error) {}
   };
@@ -45,7 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       if (isAuthenticated(nextAuthData)) {
         setAuthData(nextAuthData);
-        await Router.push("/home");
+        if (Router.route == "/") await Router.push("/home");
         return;
       }
     } catch {}

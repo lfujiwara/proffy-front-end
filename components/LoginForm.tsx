@@ -1,20 +1,21 @@
 import {
   Alert,
+  AlertDescription,
   AlertIcon,
   AlertTitle,
-  AlertDescription,
   Box,
   Button,
-  CloseButton,
   Checkbox,
+  CloseButton,
   Flex,
   FlexProps,
   Text,
 } from "@chakra-ui/core";
-import { useForm } from "react-hook-form";
-import ProffyInput from "./ProffyInput";
+import Router from "next/router";
 import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
 import AuthContext, { isAuthenticated } from "../contexts/AuthContext";
+import ProffyInput from "./ProffyInput";
 
 export default function LoginForm(props: FlexProps) {
   const [wrongCredentials, setWrongCredentials] = useState(false);
@@ -22,7 +23,8 @@ export default function LoginForm(props: FlexProps) {
   const { register, handleSubmit, watch, errors } = useForm();
   const onSubmit = async (data: any) => {
     await authData.credentialsLogin(data.email, data.password, data.rememberMe);
-    if (!isAuthenticated(authData)) setWrongCredentials(true);
+    if (isAuthenticated(authData)) await Router.back();
+    else setWrongCredentials(true);
   };
 
   return (

@@ -1,20 +1,23 @@
-import { Box, Flex, FlexProps, Text, Image } from "@chakra-ui/core";
+import { Box, Flex, FlexProps, Image, Text } from "@chakra-ui/core";
+import Link from "next/link";
 
 export default function Avatar(
-  props: FlexProps & { avatarUrl?: string; name?: string }
+  props: FlexProps & { avatarurl?: string; name?: string }
 ) {
   return (
-    <Flex {...props} alignItems="center">
-      <Box backgroundColor="back_background">
-        <Image height="40px" borderRadius="50%" src={props.avatarUrl} />
-      </Box>
-      <Box width="0.5em" />
-      <Text fontSize="md">{props.name}</Text>
-    </Flex>
+    <Link href="/profile">
+      <Flex {...props} alignItems="center">
+        <Box backgroundColor="back_background">
+          <Image height="40px" borderRadius="50%" src={props.avatarurl} />
+        </Box>
+        <Box width="0.5em" />
+        <Text fontSize="md">{props.name}</Text>
+      </Flex>
+    </Link>
   );
 }
 
 Avatar.defaultProps = {
-  avatarUrl: "images/icons/avatar.png",
+  avatarurl: "images/icons/avatar.png",
   name: "Alguém",
 };
