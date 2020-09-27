@@ -1,15 +1,22 @@
-import { Box, Button, Flex, Image, Text } from "@chakra-ui/core";
+import { Box, Flex, Image, Text } from "@chakra-ui/core";
+import { MotionFlex } from "../components/animated";
 import Avatar from "../components/Avatar";
-import ProffyLogo from "../components/ProffyLogo";
 import HomeButton from "../components/HomeButton";
-import AuthContext from "../contexts/AuthContext";
 import Logout from "../components/Logout";
+import ProffyLogo from "../components/ProffyLogo";
+import AuthContext from "../contexts/AuthContext";
 
 export default function Home() {
   return (
     <AuthContext.Consumer>
       {(auth) => (
-        <Flex minHeight="100vh" flexDirection="column">
+        <MotionFlex
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          minHeight="100vh"
+          flexDirection="column"
+        >
           <Flex
             width="100%"
             flex={["none", "none", "2"]}
@@ -95,7 +102,7 @@ export default function Home() {
               </HomeButton>
             </Flex>
           </Flex>
-        </Flex>
+        </MotionFlex>
       )}
     </AuthContext.Consumer>
   );

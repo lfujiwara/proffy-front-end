@@ -1,11 +1,15 @@
 import { Box, Flex, Text } from "@chakra-ui/core";
 import Head from "next/head";
+import { MotionBox } from "../components/animated";
 import LoginForm from "../components/LoginForm";
 import ProffyBanner from "../components/ProffyBanner";
 
 export default function Home() {
   return (
-    <Box
+    <MotionBox
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
       display="flex"
       minHeight="100vh"
       alignItems="stretch"
@@ -55,6 +59,6 @@ export default function Home() {
           </a>
         </Flex>
       </Flex>
-    </Box>
+    </MotionBox>
   );
 }
