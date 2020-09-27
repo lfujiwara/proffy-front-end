@@ -1,13 +1,42 @@
-import { Box, Button, Checkbox, Flex, FlexProps, Text } from "@chakra-ui/core";
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  Box,
+  Button,
+  CloseButton,
+  Checkbox,
+  Flex,
+  FlexProps,
+  Text,
+} from "@chakra-ui/core";
 import { useForm } from "react-hook-form";
 import ProffyInput from "./ProffyInput";
+import { useContext, useState } from "react";
+import AuthContext, { isAuthenticated } from "../contexts/AuthContext";
 
 export default function LoginForm(props: FlexProps) {
+  const [wrongCredentials, setWrongCredentials] = useState(false);
+  const authData = useContext(AuthContext);
   const { register, handleSubmit, watch, errors } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = async (data: any) => {
+    await authData.credentialsLogin(data.email, data.password, data.rememberMe);
+    if (!isAuthenticated(authData)) setWrongCredentials(true);
+  };
 
   return (
     <Flex flexDirection="column" alignContent="stretch" {...props}>
+      {!!wrongCredentials && (
+        <Alert status="error">
+          <AlertIcon />
+          <AlertTitle mr={2}>Your browser is outdated!</AlertTitle>
+          <AlertDescription>
+            Your Chakra experience may be degraded.
+          </AlertDescription>
+          <CloseButton position="absolute" right="8px" top="8px" />
+        </Alert>
+      )}
       <Text color="texts_titles" fontSize="2em" fontWeight="bold">
         Fazer login
       </Text>

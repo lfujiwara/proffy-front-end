@@ -41,6 +41,10 @@ const customTheme = {
     body: "Poppins, sans-serif",
     titles: "Archivo, sans-serif",
   },
+  space: {
+    button_padding_x: "2em",
+    button_padding_y: "1em",
+  },
 };
 
 export default customTheme;
