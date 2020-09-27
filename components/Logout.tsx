@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import Router from "next/router";
 import { IconButton } from "@chakra-ui/core";
+import { UnlockIcon } from "@chakra-ui/icons";
 import AuthContext from "../contexts/AuthContext";
 
 export default function Logout() {
@@ -12,9 +13,8 @@ export default function Logout() {
   return (
     <IconButton
       aria-label="logout"
-      icon="unlock"
-      background="none"
-      color="texts_in_purple_title"
+      icon={<UnlockIcon />}
+      colorScheme="texts_in_purple_base"
       size="md"
       children={[]}
       onClick={logout}

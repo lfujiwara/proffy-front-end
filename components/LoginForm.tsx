@@ -62,7 +62,7 @@ export default function LoginForm(props: FlexProps) {
           <Box height="2em" />
           <Flex alignItems="center">
             <Checkbox
-              variantColor="custom_green"
+              colorScheme="custom_green"
               name="rememberMe"
               ref={register}
             >

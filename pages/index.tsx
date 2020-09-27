@@ -1,4 +1,4 @@
-import { Box, Flex, PseudoBox, Text } from "@chakra-ui/core";
+import { Box, Flex, Text } from "@chakra-ui/core";
 import Head from "next/head";
 import LoginForm from "../components/LoginForm";
 import ProffyBanner from "../components/ProffyBanner";
@@ -39,7 +39,7 @@ export default function Home() {
         <Box height="1em" />
         <Flex width="100%" maxWidth="25em">
           <a href="#">
-            <PseudoBox
+            <Box
               as={Text}
               marginBottom="0"
               borderBottom="2px solid transparent"
@@ -51,7 +51,7 @@ export default function Home() {
               fontWeight="bold"
             >
               Cadastrar-se
-            </PseudoBox>
+            </Box>
           </a>
         </Flex>
       </Flex>

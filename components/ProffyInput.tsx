@@ -1,4 +1,4 @@
-import { Input, InputProps, PseudoBox } from "@chakra-ui/core";
+import { Input, InputProps, Box } from "@chakra-ui/core";
 import { Ref } from "react";
 
 export default function ProffyInput(
@@ -11,7 +11,7 @@ export default function ProffyInput(
   }
 ) {
   return (
-    <PseudoBox
+    <Box
       as={Input}
       ref={props.hookRef}
       borderTopLeftRadius={props.roundTopBorder ? "8px" : "0"}

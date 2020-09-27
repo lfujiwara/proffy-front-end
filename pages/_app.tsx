@@ -1,4 +1,4 @@
-import { CSSReset, ThemeProvider } from "@chakra-ui/core";
+import { ChakraProvider } from "@chakra-ui/core";
 import type { AppProps } from "next/app";
 import Router from "next/router";
 import theme from "../styles/theme";
@@ -13,7 +13,6 @@ import AuthContext, {
   isAuthenticated,
   logout,
 } from "../contexts/AuthContext";
-import jwt from "jwt-decode";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [authData, setAuthData] = useState<IAuthContextValue>(
@@ -63,8 +62,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [authData]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CSSReset />
+    <ChakraProvider resetCSS theme={theme}>
       <AuthContext.Provider
         value={{
           ...authData,
@@ -75,7 +73,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       >
         <Component {...pageProps} />
       </AuthContext.Provider>
-    </ThemeProvider>
+    </ChakraProvider>
   );
 }
 
