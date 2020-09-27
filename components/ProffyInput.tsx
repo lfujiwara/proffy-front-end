@@ -1,4 +1,4 @@
-import { Input, InputProps, Box } from "@chakra-ui/core";
+import { Box, Input, InputProps } from "@chakra-ui/core";
 import { Ref } from "react";
 
 export default function ProffyInput(
@@ -10,23 +10,31 @@ export default function ProffyInput(
     hideBottomBorder?: boolean;
   }
 ) {
+  const {
+    hookRef,
+    roundBottomBorder,
+    roundTopBorder,
+    hideTopBorder,
+    hideBottomBorder,
+    ...boxProps
+  } = props;
   return (
     <Box
       as={Input}
-      ref={props.hookRef}
-      borderTopLeftRadius={props.roundTopBorder ? "8px" : "0"}
-      borderTopRightRadius={props.roundTopBorder ? "8px" : "0"}
-      borderBottomLeftRadius={props.roundBottomBorder ? "8px" : "0"}
-      borderBottomRightRadius={props.roundBottomBorder ? "8px" : "0"}
-      borderTop={props.hideTopBorder ? "none" : ""}
-      borderBottom={props.hideBottomBorder ? "none" : ""}
+      ref={hookRef}
+      borderTopLeftRadius={roundTopBorder ? "8px" : "0"}
+      borderTopRightRadius={roundTopBorder ? "8px" : "0"}
+      borderBottomLeftRadius={roundBottomBorder ? "8px" : "0"}
+      borderBottomRightRadius={roundBottomBorder ? "8px" : "0"}
+      borderTop={hideTopBorder ? "none" : ""}
+      borderBottom={hideBottomBorder ? "none" : ""}
       borderColor="back_lines_in_white"
       color="texts_base"
       padding="1.5em"
       width="100%"
       background="transparent"
       _focus={{ borderColor: "initial" }}
-      {...props}
+      {...boxProps}
     />
   );
 }
