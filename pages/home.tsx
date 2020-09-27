@@ -33,6 +33,7 @@ export default function Home() {
               justifyContent="space-between"
               alignItems="flex-start"
               flexDirection="row"
+              marginBottom="1em"
             >
               <Avatar
                 color="texts_in_purple_base"
