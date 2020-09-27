@@ -1,6 +1,6 @@
-import React from "react";
 import _axios from "axios";
 import jwt from "jwt-decode";
+import React from "react";
 import AuthenticatedUserData from "../models/AuthenticatedUser";
 
 const API_URL = "http://localhost:5000";
@@ -17,8 +17,8 @@ export interface IAuthContextValue extends ITokenContextValue {
     email: string,
     password: string,
     rememberMe: boolean
-  ) => Promise<void>;
-  cookieLogin: () => Promise<void>;
+  ) => Promise<boolean>;
+  cookieLogin: () => Promise<boolean>;
   logout: () => Promise<void>;
 }
 
@@ -27,8 +27,8 @@ export const AuthContextDefaultValue: IAuthContextValue = {
   userData: null,
   expires: null,
   credentialsLogin: (email: string, password: string, rememberMe: boolean) =>
-    new Promise<void>(() => {}),
-  cookieLogin: () => new Promise<void>(() => {}),
+    new Promise<boolean>(() => false),
+  cookieLogin: () => new Promise<boolean>(() => false),
   logout: () => new Promise<void>(() => {}),
 };
 

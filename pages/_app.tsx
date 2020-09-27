@@ -31,8 +31,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       if (isAuthenticated(nextAuthData)) {
         setAuthData(nextAuthData);
+        return true;
       }
-    } catch (error) {}
+    } catch {}
+    setAuthData(AuthContextDefaultValue);
+    return false;
   };
 
   const authCookieLogin = async () => {
@@ -44,10 +47,12 @@ function MyApp({ Component, pageProps }: AppProps) {
       if (isAuthenticated(nextAuthData)) {
         setAuthData(nextAuthData);
         if (Router.route == "/") await Router.push("/home");
-        return;
+        return false;
       }
     } catch {}
+    setAuthData(AuthContextDefaultValue);
     await Router.push("/");
+    return true;
   };
 
   const authLogout = async () => {
@@ -57,7 +62,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     if (!isAuthenticated(authData)) authCookieLogin();
-  }, [authData]);
+  }, []);
 
   return (
     <ChakraProvider resetCSS theme={theme}>

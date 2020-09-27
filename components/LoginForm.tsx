@@ -1,12 +1,12 @@
 import {
   Alert,
-  AlertDescription,
   AlertIcon,
   AlertTitle,
   Box,
   Button,
   Checkbox,
   CloseButton,
+  Collapse,
   Flex,
   FlexProps,
   Text,
@@ -14,7 +14,7 @@ import {
 import Router from "next/router";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import AuthContext, { isAuthenticated } from "../contexts/AuthContext";
+import AuthContext from "../contexts/AuthContext";
 import ProffyInput from "./ProffyInput";
 
 export default function LoginForm(props: FlexProps) {
@@ -22,23 +22,26 @@ export default function LoginForm(props: FlexProps) {
   const authData = useContext(AuthContext);
   const { register, handleSubmit, watch, errors } = useForm();
   const onSubmit = async (data: any) => {
-    await authData.credentialsLogin(data.email, data.password, data.rememberMe);
-    if (isAuthenticated(authData)) await Router.back();
+    if (
+      await authData.credentialsLogin(
+        data.email,
+        data.password,
+        data.rememberMe
+      )
+    )
+      Router.back();
     else setWrongCredentials(true);
   };
 
   return (
     <Flex flexDirection="column" alignContent="stretch" {...props}>
-      {!!wrongCredentials && (
-        <Alert status="error">
-          <AlertIcon />
-          <AlertTitle mr={2}>Your browser is outdated!</AlertTitle>
-          <AlertDescription>
-            Your Chakra experience may be degraded.
-          </AlertDescription>
-          <CloseButton position="absolute" right="8px" top="8px" />
+      <Collapse isOpen={wrongCredentials}>
+        <Alert status="error" padding="1em">
+          <AlertIcon marginRight="1em" />
+          <AlertTitle mr={2}>E-mail e/ou senha incorretos</AlertTitle>
+          <CloseButton onClick={() => setWrongCredentials(false)} />
         </Alert>
-      )}
+      </Collapse>
       <Text color="texts_titles" fontSize="2em" fontWeight="bold">
         Fazer login
       </Text>
