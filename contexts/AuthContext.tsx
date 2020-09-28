@@ -1,7 +1,7 @@
 import _axios from "axios";
 import jwt from "jwt-decode";
 import React from "react";
-import AuthenticatedUserData from "../models/AuthenticatedUser";
+import IAuthenticatedUserData from "../models/IAuthenticatedUserData";
 
 const API_URL = "http://localhost:5000";
 const axios = _axios.create({ withCredentials: true, baseURL: API_URL });
@@ -12,7 +12,7 @@ export interface ITokenContextValue {
 }
 
 export interface IAuthContextValue extends ITokenContextValue {
-  userData: AuthenticatedUserData | null;
+  userData: IAuthenticatedUserData | null;
   credentialsLogin: (
     email: string,
     password: string,
@@ -34,7 +34,7 @@ export const AuthContextDefaultValue: IAuthContextValue = {
 
 export async function fetchUserData(
   bearerToken: string
-): Promise<AuthenticatedUserData> {
+): Promise<IAuthenticatedUserData> {
   return await axios
     .get("/users/me", {
       headers: { Authorization: `Bearer ${bearerToken}` },

@@ -1,4 +1,4 @@
-export default interface AuthenticatedUserData {
+export default interface IAuthenticatedUserData {
   id: string;
   email: string;
   firstName: string;
