@@ -5,4 +5,5 @@ export default interface AuthenticatedUserData {
   lastName: string;
   role: string;
   lastUpdated: Date;
+  subjectId: string;
 }
