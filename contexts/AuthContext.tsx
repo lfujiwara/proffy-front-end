@@ -48,18 +48,17 @@ export async function credentialsLogin(
   password: string,
   rememberMe: boolean
 ): Promise<ITokenContextValue> {
-  const data = await axios
+  return axios
     .post(
       "/auth/login",
       { email, password, rememberMe },
       { withCredentials: true }
     )
-    .then((response) => response.data);
-  const token = jwt(data.access);
-  return {
-    accessToken: data.access,
-    expires: new Date(token.exp * 1000),
-  };
+    .then((response) => response.data)
+    .then((data) => ({
+      accessToken: data.access,
+      expires: new Date(jwt(data.access).exp * 1000),
+    }));
 }
 
 export function isAuthenticated(value: IAuthContextValue): boolean {
@@ -67,14 +66,13 @@ export function isAuthenticated(value: IAuthContextValue): boolean {
 }
 
 export async function cookieLogin(): Promise<ITokenContextValue> {
-  const data = await axios
+  return axios
     .post("/auth/access", {}, { withCredentials: true })
-    .then((response) => response.data);
-  const token = jwt(data.token);
-  return {
-    accessToken: data.token,
-    expires: new Date(token.exp * 1000),
-  };
+    .then((response) => response.data)
+    .then((data) => ({
+      accessToken: data.token,
+      expires: new Date(jwt(data.token).exp * 1000),
+    }));
 }
 
 export async function logout() {

@@ -11,35 +11,45 @@ import {
   FlexProps,
   Text,
 } from "@chakra-ui/core";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import AuthContext from "../contexts/AuthContext";
 import ProffyInput from "./ProffyInput";
 
 export default function LoginForm(props: FlexProps) {
-  const [wrongCredentials, setWrongCredentials] = useState(false);
+  const router = useRouter();
+  const [errorBox, setErrorBox] = useState<null | string>(null);
   const authData = useContext(AuthContext);
   const { register, handleSubmit, watch, errors } = useForm();
   const onSubmit = async (data: any) => {
-    if (
-      await authData.credentialsLogin(
-        data.email,
-        data.password,
-        data.rememberMe
+    try {
+      if (
+        await authData.credentialsLogin(
+          data.email,
+          data.password,
+          data.rememberMe
+        )
       )
-    )
-      Router.back();
-    else setWrongCredentials(true);
+        router.push({
+          pathname: router.query.backTo
+            ? router.query.backTo.toString()
+            : "/home",
+        });
+    } catch (err) {
+      if (err?.request?.status == 400)
+        setErrorBox("E-mail e/ou senha incorretos.");
+      if (err?.request?.status >= 500) setErrorBox("Erro desconhecido.");
+    }
   };
 
   return (
     <Flex flexDirection="column" alignContent="stretch" {...props}>
-      <Collapse isOpen={wrongCredentials}>
+      <Collapse isOpen={errorBox !== null}>
         <Alert status="error" padding="1em">
           <AlertIcon marginRight="1em" />
-          <AlertTitle mr={2}>E-mail e/ou senha incorretos</AlertTitle>
-          <CloseButton onClick={() => setWrongCredentials(false)} />
+          <AlertTitle mr={2}>{errorBox}</AlertTitle>
+          <CloseButton onClick={() => setErrorBox(null)} />
         </Alert>
       </Collapse>
       <Text color="texts_titles" fontSize="2em" fontWeight="bold">
