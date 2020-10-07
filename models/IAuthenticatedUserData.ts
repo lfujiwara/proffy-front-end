@@ -6,4 +6,6 @@ export default interface IAuthenticatedUserData {
   role: string;
   lastUpdated: Date;
   subjectId: string;
+  currency: string;
+  hourlyRate: number;
 }

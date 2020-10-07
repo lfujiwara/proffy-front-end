@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { ReactNode, ReactNodeArray, useEffect, useState } from "react";
 import AuthContext, {
   AuthContextDefaultValue,
@@ -12,6 +13,7 @@ import AuthContext, {
 export default function AuthProvider(props: {
   children: ReactNodeArray | ReactNode;
 }) {
+  const router = useRouter();
   const [authData, setAuthData] = useState<IAuthContextValue>(
     AuthContextDefaultValue
   );
@@ -53,6 +55,20 @@ export default function AuthProvider(props: {
     setAuthData(AuthContextDefaultValue);
   };
 
+  const getAccessToken = async (redirectIfNotAuthenticated = true) => {
+    if (!isAuthenticated(authData)) {
+      try {
+        await authCookieLogin();
+      } catch (err) {
+        if (err?.request?.status == 401)
+          router.push("/", { query: { backTo: router.pathname } });
+      }
+      if (!isAuthenticated(authData))
+        router.push("/", { query: { backTo: router.pathname } });
+    }
+    return authData.accessToken;
+  };
+
   useEffect(() => {
     if (!isAuthenticated(authData)) authCookieLogin();
   }, []);
@@ -64,6 +80,7 @@ export default function AuthProvider(props: {
         credentialsLogin: authCredentialsLogin,
         cookieLogin: authCookieLogin,
         logout: authLogout,
+        getAccessToken,
       }}
     >
       {props.children}

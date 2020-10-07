@@ -41,6 +41,7 @@ export default function Home() {
             <Avatar
               color="texts_in_purple_base"
               alignSelf="flex-start"
+              cursor="pointer"
               name={authData.userData?.firstName}
             />
             <Logout />

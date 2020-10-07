@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { ReactNode, ReactNodeArray, useContext, useEffect } from "react";
+import { ReactNode, ReactNodeArray, useContext } from "react";
 import AuthContext, { isAuthenticated } from "../contexts/AuthContext";
 
 export default function RequireAuth(props: {
@@ -8,10 +8,8 @@ export default function RequireAuth(props: {
   const router = useRouter();
   const authData = useContext(AuthContext);
 
-  useEffect(() => {
-    if (!isAuthenticated(authData))
-      router.push({ pathname: "/", query: { backTo: router.pathname } });
-  }, []);
+  if (!isAuthenticated(authData) && typeof window !== "undefined")
+    router.push({ pathname: "/", query: { backTo: router.pathname } });
 
   return isAuthenticated(authData) ? <>{props.children}</> : <></>;
 }

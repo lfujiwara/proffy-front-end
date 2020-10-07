@@ -20,6 +20,7 @@ export interface IAuthContextValue extends ITokenContextValue {
   ) => Promise<boolean>;
   cookieLogin: () => Promise<boolean>;
   logout: () => Promise<void>;
+  getAccessToken: () => Promise<string>;
 }
 
 export const AuthContextDefaultValue: IAuthContextValue = {
@@ -30,6 +31,7 @@ export const AuthContextDefaultValue: IAuthContextValue = {
     new Promise<boolean>(() => false),
   cookieLogin: () => new Promise<boolean>(() => false),
   logout: () => new Promise<void>(() => {}),
+  getAccessToken: async () => new Promise(() => ""),
 };
 
 export async function fetchUserData(
