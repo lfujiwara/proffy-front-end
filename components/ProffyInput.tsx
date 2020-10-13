@@ -8,6 +8,8 @@ export default function ProffyInput(
     roundTopBorder?: boolean;
     hideTopBorder?: boolean;
     hideBottomBorder?: boolean;
+    component?: any;
+    componentProps?: any;
   }
 ) {
   const {
@@ -16,11 +18,13 @@ export default function ProffyInput(
     roundTopBorder,
     hideTopBorder,
     hideBottomBorder,
+    componentProps,
+    component,
     ...boxProps
   } = props;
   return (
     <Box
-      as={Input}
+      as={component ?? Input}
       ref={hookRef}
       borderTopLeftRadius={roundTopBorder ? "8px" : "0"}
       borderTopRightRadius={roundTopBorder ? "8px" : "0"}
@@ -32,9 +36,10 @@ export default function ProffyInput(
       color="texts_base"
       padding="1.5em"
       width="100%"
-      background="transparent"
+      backgroundColor="shapes_02"
       _focus={{ borderColor: "initial" }}
       {...boxProps}
+      {...(componentProps ?? {})}
     />
   );
 }

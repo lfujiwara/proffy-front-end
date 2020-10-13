@@ -40,11 +40,12 @@ export default function Home() {
           alignItems="center"
           flexDirection="column"
           position="relative"
+          backgroundColor="back_background"
         >
           <LoginForm width="100%" maxWidth="25em" />
           <Box height="1em" />
           <Flex width="100%" maxWidth="25em">
-            <a href="#">
+            <a href="/register">
               <Box
                 as={Text}
                 marginBottom="0"
