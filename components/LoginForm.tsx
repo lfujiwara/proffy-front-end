@@ -45,7 +45,11 @@ export default function LoginForm(props: FlexProps) {
 
   return (
     <Flex flexDirection="column" alignContent="stretch" {...props}>
-      <Collapse isOpen={errorBox !== null}>
+      <Collapse
+        isOpen={errorBox !== null}
+        marginBottom="2em"
+        borderRadius="8px"
+      >
         <Alert status="error" padding="1em">
           <AlertIcon marginRight="1em" />
           <AlertTitle mr={2}>{errorBox}</AlertTitle>

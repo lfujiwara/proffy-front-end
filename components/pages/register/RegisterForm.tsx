@@ -29,18 +29,18 @@ export default function RegisterForm(
       .required()
       .min(1)
       .max(128)
-      .matches("^[ À-ÿA-Za-z]+$"),
+      .matches(/^[ À-ÿA-Za-z]+$/),
     lastName: yup
       .string()
       .required()
       .min(1)
       .max(128)
-      .matches("^[ À-ÿA-Za-z]+$"),
+      .matches(/^[ À-ÿA-Za-z]+$/),
     email: yup
       .string()
       .required()
       .email()
-      .test(async (value) => {
+      .test("email", "validate email", async (value) => {
         try {
           await usersController.validateEmail(value);
           return true;
@@ -53,7 +53,7 @@ export default function RegisterForm(
       .required()
       .min(8)
       .max(20)
-      .test(async (value) => {
+      .test("phoneNumber", "validate phone number", async (value) => {
         try {
           await usersController.validatePhoneNumber(value);
           return true;

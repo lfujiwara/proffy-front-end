@@ -1,8 +1,11 @@
 import { Image } from "@chakra-ui/image";
 import { Text } from "@chakra-ui/layout";
-import { MotionBox } from "../../animated";
+import { MotionBox } from "./animated";
 
-export default function RegisterSuccessBanner() {
+export default function SuccessBanner(props: {
+  title: React.ReactNode | React.ReactNodeArray;
+  text: React.ReactNode | React.ReactNodeArray;
+}) {
   return (
     <MotionBox
       initial={{ opacity: 0 }}
@@ -30,11 +33,10 @@ export default function RegisterSuccessBanner() {
         fontSize="2em"
         marginBottom="1em"
       >
-        Cadastro concluído
+        {props.title}
       </Text>
       <Text color="texts_in_purple_base" maxWidth="xl">
-        Verifique seu e-mail para mais instruções. <br />
-        Seu cadastro expira em alguns minutos!
+        {props.text}
       </Text>
     </MotionBox>
   );

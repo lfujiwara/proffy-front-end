@@ -5,27 +5,23 @@ import Router from "next/router";
 import { useState } from "react";
 import { MotionBox } from "../components/animated";
 import NoAuth from "../components/NoAuth";
+import ConfirmRegistrationForm from "../components/pages/confirm-registration/ConfirmRegistrationForm";
 import RegisterForm from "../components/pages/register/RegisterForm";
 import SuccessBanner from "../components/SuccessBanner";
 import ProffyBanner from "../components/ProffyBanner";
 
-export default function Register() {
+export default function ConfirmRegistration(props: { query: any }) {
   const [showSuccessBanner, setShowSuccessBanner] = useState(false);
   return (
     <NoAuth>
       <Head>
-        <title>Proffy - Cadastro</title>
+        <title>Proffy - Confirmação de cadastro</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {showSuccessBanner ? (
         <SuccessBanner
-          title="Cadastro enviado"
-          text={
-            <>
-              Verifique seu e-mail para mais instruções. <br />
-              Seu cadastro expira em alguns minutos!
-            </>
-          }
+          title="Cadastro concluído"
+          text="Você já pode fazer login."
         />
       ) : (
         <MotionBox
@@ -39,22 +35,6 @@ export default function Register() {
         >
           <Flex
             flex={["0", "0", "0", "1"]}
-            paddingX="1em"
-            paddingY="2em"
-            justifyContent="center"
-            alignItems="center"
-            flexDirection="column"
-            position="relative"
-            backgroundColor="back_background"
-          >
-            <RegisterForm
-              width="100%"
-              maxWidth="25em"
-              onSuccess={() => setShowSuccessBanner(true)}
-            />
-          </Flex>
-          <Flex
-            flex={["0", "0", "0", "1"]}
             justifyContent="center"
             alignItems="center"
             backgroundColor="purple"
@@ -63,6 +43,21 @@ export default function Register() {
             overflow="hidden"
           >
             <ProffyBanner />
+          </Flex>
+          <Flex
+            flex={["0", "0", "0", "1"]}
+            paddingX="1em"
+            paddingY="2em"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            position="relative"
+            backgroundColor="back_background"
+          >
+            <ConfirmRegistrationForm
+              query={props.query}
+              onSuccess={() => setShowSuccessBanner(true)}
+            />
           </Flex>
         </MotionBox>
       )}
@@ -77,4 +72,12 @@ export default function Register() {
       />
     </NoAuth>
   );
+}
+
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      query: context.query ?? null,
+    },
+  };
 }
