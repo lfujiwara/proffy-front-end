@@ -44,7 +44,10 @@ export default function ProfileForm() {
     resolver: yupResolver(schema),
   });
   const [subjectIds, setSubjectIds] = useState([]);
-  const onSubmit = usersController.updateMe;
+  const onSubmit = async (data) => {
+    await usersController.updateMe(data);
+    await authData.updateUserData();
+  };
 
   const fetchSubjectIds = async () => {
     subjectsController.get().then(setSubjectIds);

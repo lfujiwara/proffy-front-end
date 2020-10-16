@@ -55,7 +55,7 @@ export default function AuthProvider(props: {
     setAuthData(AuthContextDefaultValue);
   };
 
-  const getAccessToken = async (redirectIfNotAuthenticated = true) => {
+  const authenticateOrExit = async () => {
     if (!isAuthenticated(authData)) {
       try {
         await authCookieLogin();
@@ -66,7 +66,20 @@ export default function AuthProvider(props: {
       if (!isAuthenticated(authData))
         router.push("/", { query: { backTo: router.pathname } });
     }
+  };
+
+  const getAccessToken = async (redirectIfNotAuthenticated = true) => {
+    await authenticateOrExit();
     return authData.accessToken;
+  };
+
+  const updateUserData = async () => {
+    await authenticateOrExit();
+    const userData = await fetchUserData(await getAccessToken());
+    setAuthData({
+      ...authData,
+      userData,
+    });
   };
 
   useEffect(() => {
@@ -81,6 +94,7 @@ export default function AuthProvider(props: {
         cookieLogin: authCookieLogin,
         logout: authLogout,
         getAccessToken,
+        updateUserData,
       }}
     >
       {props.children}
