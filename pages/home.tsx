@@ -1,4 +1,5 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/core";
+import Router from "next/router";
 import { useContext } from "react";
 import { MotionFlex } from "../components/animated";
 import Avatar from "../components/Avatar";
@@ -85,7 +86,11 @@ export default function Home() {
             fontSize="1.25em"
             width={["100%", "100%", "100%", "auto"]}
           >
-            <HomeButton backgroundColor="purple" color="texts_in_purple_title">
+            <HomeButton
+              backgroundColor="purple"
+              color="texts_in_purple_title"
+              onClick={() => Router.push("/study")}
+            >
               <Image
                 src="images/icons/study.svg"
                 marginRight="1em"

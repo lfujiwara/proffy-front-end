@@ -8,4 +8,5 @@ export default interface IAuthenticatedUserData {
   subjectId: string;
   currency: string;
   hourlyRate: number;
+  isActive: boolean;
 }

@@ -2,9 +2,9 @@ import { Box, Flex, FlexProps, Text } from "@chakra-ui/core";
 import mapNumberToWeekDay from "../../../lib/mapNumberToWeekDay";
 
 export default function AvailableTimeWindowCard(
-  props: FlexProps & { weekDay: number }
+  props: FlexProps & { weekDay: number; startHour?: number; endHour?: number }
 ) {
-  const { weekDay, ...flexProps } = props;
+  const { weekDay, startHour, endHour, ...flexProps } = props;
   return (
     <Flex
       borderRadius="8px"
@@ -13,8 +13,7 @@ export default function AvailableTimeWindowCard(
       backgroundColor="shapes_02"
       padding="1em"
       flexDirection="column"
-      flex="1"
-      minWidth="120px"
+      opacity={!!startHour && !!endHour ? "100%" : "40%"}
       {...flexProps}
     >
       <Box marginBottom="1em">
@@ -30,7 +29,7 @@ export default function AvailableTimeWindowCard(
           Horário
         </Text>
         <Text color="texts_base" fontWeight="bold">
-          12h - 18h
+          {!!startHour && !!endHour ? `${startHour}h - ${endHour}h` : "N/D"}
         </Text>
       </Box>
     </Flex>

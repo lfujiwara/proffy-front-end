@@ -185,7 +185,11 @@ export default function ProfileInfoForm() {
             <FormLabel {...inputLabelProps} marginRight="1em">
               Visibilidade nas buscas
             </FormLabel>
-            <Switch name="isActive" ref={register} />
+            <Switch
+              name="isActive"
+              ref={register}
+              defaultIsChecked={authData.userData.isActive}
+            />
           </FormControl>
         </ProfileFormSection>
         <Button

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import useAvailableTimeWindowController from "../../../backend-api/AvailableTimeWindowController";
 import IAvailableTimeWindow from "../../../models/IAvailableTimeWindow";
-import AvailableTimeWindowCard from "./AvailableTimeWindowCard";
+import AvailableTimeWindowCard from "../study/AvailableTimeWindowCard";
 import AvailableTimeWindowForm from "./AvailableTimeWindowForm";
 
 const weekDays = [1, 2, 3, 4, 5, 6, 7];

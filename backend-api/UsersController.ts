@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { useContext } from "react";
 import AuthContext, { isAuthenticated } from "../contexts/AuthContext";
 import IAuthenticatedUserData from "../models/IAuthenticatedUserData";
+import IUser from "../models/IUser";
 
 const API_URL = "http://localhost:5000";
 
@@ -50,6 +51,18 @@ export function useUsersController() {
       return anonymousAxiosInstance.get("/validate-phone-number", {
         params: { phoneNumber },
       });
+    },
+    async listProffys() {
+      const localAxios = await getAxiosInstance();
+      return localAxios
+        .get("/proffys")
+        .then((response): IUser[] => response.data);
+    },
+    async countProffys() {
+      const localAxios = await getAxiosInstance();
+      return localAxios
+        .get("/proffys/count")
+        .then((response): number => response.data);
     },
   };
 }

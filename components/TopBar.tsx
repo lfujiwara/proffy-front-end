@@ -3,7 +3,7 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Flex } from "@chakra-ui/layout";
 import Router from "next/router";
 
-export default function TopBar() {
+export default function TopBar(props: { title: string }) {
   return (
     <Flex alignSelf="stretch">
       <Flex
@@ -22,7 +22,7 @@ export default function TopBar() {
           icon={<ArrowBackIcon />}
         />
         <Text color="texts_in_purple_base" fontSize="14px">
-          Meu Perfil
+          {props.title}
         </Text>
         <Image height="14px" src="/images/logo.svg" />
       </Flex>

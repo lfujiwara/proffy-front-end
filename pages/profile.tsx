@@ -24,7 +24,7 @@ export default function Profile() {
         minHeight="100vh"
         paddingBottom="2em"
       >
-        <TopBar />
+        <TopBar title="Meu perfil" />
         <Flex
           flexDirection="column"
           background="url('images/success-background.svg')"
