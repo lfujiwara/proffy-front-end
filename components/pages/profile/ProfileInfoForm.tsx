@@ -7,6 +7,7 @@ import {
   NumberInput,
   NumberInputField,
   Select,
+  Switch,
   Textarea,
 } from "@chakra-ui/core";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -179,6 +180,13 @@ export default function ProfileInfoForm() {
               />
             </FormControl>
           </Flex>
+
+          <FormControl as={Flex} alignItems="center">
+            <FormLabel {...inputLabelProps} marginRight="1em">
+              Visibilidade nas buscas
+            </FormLabel>
+            <Switch name="isActive" ref={register} />
+          </FormControl>
         </ProfileFormSection>
         <Button
           type="submit"
