@@ -47,4 +47,18 @@ const customTheme = {
   },
 };
 
+export const baseInputProps = {
+  padding: "1em",
+  backgroundColor: "shapes_02",
+  _focus: {
+    borderColor: "back_lines_in_white",
+    boxShadow: "0 0 0 1px lightgray",
+  },
+};
+
+export const inputLabelProps = {
+  color: "texts_complements",
+  fontSize: "0.875em",
+};
+
 export default customTheme;
